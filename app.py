@@ -10,9 +10,11 @@ app.secret_key = 'Bob'
 api = Api(app)
 
 
-class home(Resource):
+class Home(Resource):
     def get(self):
         return render_template("home.html")
+
+api.add_resource(Home, "/")
 
 if __name__ =='__main__':
     from db import db
