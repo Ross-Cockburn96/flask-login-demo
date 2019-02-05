@@ -33,9 +33,12 @@ class Tag(Resource):
             return {"message" : "An error occurred inserting the item"}, 500
         return tag.json()
 
-
+class TagList(Resource):
+    def get(self):
+        return {"tags":[tag.json() for tag in TagModel.query.all()]}
 
 api.add_resource(Tag, "/tag/<name>")
+api.add_resource(TagList, "/tags")
 if __name__ =='__main__':
     from db import db
     db.init_app(app)
