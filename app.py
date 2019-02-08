@@ -3,6 +3,7 @@ from flask import Flask, render_template
 from flask_restful import Resource, Api, reqparse, request
 from flask_cors import CORS
 from models.tag_model import TagModel
+from resources.users import RegisterUser
 from resources.tag import Tag, TagList
 
 app = Flask(__name__)
@@ -18,7 +19,7 @@ api = Api(app)
 def index():
     return render_template("test.html")
 
-
+api.add_resource(RegisterUser, "/register")
 api.add_resource(Tag, "/tag/<name>")
 api.add_resource(TagList, "/tags")
 if __name__ =='__main__':
