@@ -1,0 +1,77 @@
+<h1>Tags</h1>
+<ul id="tagList"></ul>
+
+
+<form id="form" onsubmit="return false;">
+    <input type="text" id="userInput"/>
+    <input type="submit" value="Get Tag" onClick="tagFetchRequest('GET');"/>
+    <input type="submit" value="Add Tag" onClick="tagFetchRequest('POST');"/>
+</form>
+
+<ul id="allTags"></ul>
+<script>
+    const tagList = document.getElementById('tagList'); //list for showing all tags in database
+    var allTags = document.getElementById('allTags');
+    const baseUrl = "https://improvisor.herokuapp.com"; //location of server code
+    printTags();
+    function createNode(element) {
+        return document.createElement(element); // Create the type of element you pass in the parameters
+    }
+
+    function append(parent, el) {
+        return parent.appendChild(el); // Append the second parameter(element) to the first one
+    }
+    
+    function tagFetchRequest(requestType){
+        let input = "/tag/"+document.getElementById("userInput").value;
+        let url = baseUrl+ input;
+        let fetchData = { //initialise data that will be sent as an argument in fetch function
+            method: requestType,
+            
+        }
+        fetch(url, fetchData)
+        .then((resp) => resp.json()) // Transform the data into json
+        .then(function(data) {
+            if(requestType == "GET"){ 
+                if(data.message == "item not found"){
+                    alert("not found");
+                }else{
+                    let word = createNode("word");
+                    word.innerHTML = "<div>" + data.tag+ "</div>"
+                    append(tagList, word);
+                }
+            }
+            if(requestType == "POST"){
+                let word = createNode("word");
+                word.innerHTML = "<div>" + data.tag + "</div>"
+                append(allTags, word);
+
+            }
+           /* return tags.map(function(item){
+                let word = createNode("word");
+                word.innerHTML = item.tag;
+                append(ul, word);
+
+            })*/
+            })
+        .catch(function(error){
+            console.log("error is " + error)
+        });
+    }
+    function printTags(){
+
+        let url = baseUrl + "/tags";
+        fetch(url)
+        .then((resp)=> resp.json())
+        .then(function(data){
+            console.log(data.tags);
+            let tags = data.tags;
+            return tags.map(function(item){
+                let word = createNode("word");
+                word.innerHTML = "<div>" + item.tag + "</div>";
+                append(allTags, word);
+                
+            })
+        })
+    }
+</script>
