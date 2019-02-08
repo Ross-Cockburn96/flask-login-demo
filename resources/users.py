@@ -17,7 +17,6 @@ class RegisterUser(Resource):
         data = RegisterUser.parser.parse_args()
         print(data)
         if(UserModel.find_by_email(data["email"])==None):
-            print(**data)
             user = UserModel(**data)
             user.save_to_db()
             return {"message": "User created successfully"}, 201
