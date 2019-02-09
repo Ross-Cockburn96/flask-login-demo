@@ -1,3 +1,4 @@
+import sqlite3
 from flask_restful import Resource, reqparse
 from models.user_model import UserModel
 
@@ -5,6 +6,7 @@ class RegisterUser(Resource):
     parser = reqparse.RequestParser()
     parser.add_argument("email", type=str, required=True, help="Email is a required field")
     parser.add_argument("password", type=str, required=True, help="Password is a required field")
+
     def get(self):
         data = RegisterUser.parser.parse_args()
         user = UserModel.find_by_email(data["email"])
@@ -16,6 +18,7 @@ class RegisterUser(Resource):
     def post(self):
         data = RegisterUser.parser.parse_args()
         user = UserModel(**data)
+
         if(UserModel.find_by_email(data["email"])==None):
             try:
                 user.save_to_db()

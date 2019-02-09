@@ -4,14 +4,16 @@ from models.tag_model import TagModel
 
 class Tag(Resource):
     parser = reqparse.RequestParser()
+
     parser.add_argument("user_id", type=int, required=True, help= "Every item needs a user id.")
+
     def get(self, name):
         tag = TagModel.find_by_tagName(name)
         if tag:
             return tag.json()
         else:
             return {"message":"item not found"}, 404
-    
+
     def post(self, name):
         data = Tag.parser.parse_args()
         if TagModel.find_by_tagName(name):
