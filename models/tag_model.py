@@ -2,14 +2,18 @@ from db import db
 
 class TagModel(db.Model):
     __tablename__ ="tags"
+
     id = db.Column(db.Integer, primary_key=True)
     tagname = db.Column(db.String(80))
 
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user = db.relationship('UserModel')
     def json(self):
-        return {"tag": self.tagname}
+        return {"tag": self.tagname, "user":self.user_id}
 
-    def __init__(self, tagname):
+    def __init__(self, tagname, user_id):
         self.tagname = tagname
+        self.user_id = user_id
     
     def save_to_db(self):
         db.session.add(self)
