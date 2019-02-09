@@ -14,7 +14,10 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['PROPAGATE_EXCEPTIONS'] = True
 app.secret_key = 'Bob'
 api = Api(app)
-
+@app.before_first_request
+def create_tables():
+    print("CREATING TABLES")
+    db.create_all() 
 
 @app.route('/')
 def index():
