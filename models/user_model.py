@@ -8,10 +8,18 @@ class UserModel(db.Model):
     email = db.Column(db.String(80))
     password = db.Column(db.String(80))
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> a412018780f7b7442020774e9bf7d980abd15e60
     tags = db.relationship("TagModel", lazy="dynamic")
     def json(self):
         return {"user":self.email, "tags" : [tag.json() for tag in self.tags.all()], "id" : self.id}
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> a412018780f7b7442020774e9bf7d980abd15e60
     def __init__(self, email, password):
         self.email = email
         self.password = password

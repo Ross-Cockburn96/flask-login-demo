@@ -4,7 +4,13 @@ from models.tag_model import TagModel
 
 class Tag(Resource):
     parser = reqparse.RequestParser()
+<<<<<<< HEAD
     parser.add_argument("user_id", type=int, required=True, help= "Every item needs a user id.")
+=======
+
+    parser.add_argument("user_id", type=int, required=True, help= "Every item needs a user id.")
+
+>>>>>>> a412018780f7b7442020774e9bf7d980abd15e60
     def get(self, name):
         tag = TagModel.find_by_tagName(name)
         if tag:

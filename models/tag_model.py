@@ -6,6 +6,7 @@ class TagModel(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     tagname = db.Column(db.String(80))
+
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     user = db.relationship('UserModel')
     def json(self):

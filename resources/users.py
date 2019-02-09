@@ -6,6 +6,10 @@ class RegisterUser(Resource):
     parser = reqparse.RequestParser()
     parser.add_argument("email", type=str, required=True, help="Email is a required field")
     parser.add_argument("password", type=str, required=True, help="Password is a required field")
+<<<<<<< HEAD
+=======
+
+>>>>>>> a412018780f7b7442020774e9bf7d980abd15e60
     def get(self):
         data = RegisterUser.parser.parse_args()
         user = UserModel.find_by_email(data["email"])
@@ -17,6 +21,10 @@ class RegisterUser(Resource):
     def post(self):
         data = RegisterUser.parser.parse_args()
         user = UserModel(**data)
+<<<<<<< HEAD
+=======
+
+>>>>>>> a412018780f7b7442020774e9bf7d980abd15e60
         if(UserModel.find_by_email(data["email"])==None):
             try:
                 user.save_to_db()
