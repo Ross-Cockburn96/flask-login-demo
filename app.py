@@ -3,13 +3,7 @@ from flask import Flask, render_template
 from flask_restful import Resource, Api, reqparse, request
 from flask_cors import CORS
 from models.tag_model import TagModel
-<<<<<<< HEAD
 from resources.users import RegisterUser, GetAllUsers
-=======
-
-from resources.users import RegisterUser, GetAllUsers
-
->>>>>>> a412018780f7b7442020774e9bf7d980abd15e60
 from resources.tag import Tag, TagList
 from resources.users import RegisterUser
 
@@ -23,13 +17,7 @@ app.secret_key = 'Bob'
 api = Api(app)
 @app.before_first_request
 def create_tables():
-<<<<<<< HEAD
     db.create_all()  
-=======
-
-    db.create_all()  
-
->>>>>>> a412018780f7b7442020774e9bf7d980abd15e60
 
 @app.route('/')
 def index():
